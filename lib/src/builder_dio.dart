@@ -41,9 +41,12 @@ Options buildConfigurableCacheOptions(
     String subKey,
     bool forceRefresh}) {
   if (null == options) {
-    options = Options();
+    options = Options(extra: {});
   } else if (options.responseType == ResponseType.stream) {
     throw Exception("ResponseType.stream is not supported");
+  }
+  if (options.extra == null) {
+    options.extra = {};
   }
   options.extra.addAll({DIO_CACHE_KEY_TRY_CACHE: true});
   if (null != maxAge) {
